@@ -1,10 +1,10 @@
-package quizA;
+package quizB;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuizAApplicationTests {
+class QuizBpplicationTests {
 
 	@Test
 	void contextLoads() {
