@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>「〇×クイズ」アプリ：PLAY</title>
 </head>
 <body>
-
+	<h1>「〇×クイズ」アプリ：PLAY</h1>
+	<h3>クイズ</h3>
+	<th:block th:if="${msg}">							<!--  th:block…属性のコンテナとして使うタグ ,  th:if="${msg}"に中身がある場合 中身を処理 -->
+		<p th:text="${msg}" style="color: red"></p>
+		<a th:href="@{/quiz/}">CRUD画面へ</a>			<!-- th:href="@{/quiz/play}"…遷移先URLの指定 -->
+	</th:block>
+	<th:block th:unless="${msg}">				<!--  th:unless= : th:if="${msg}"に中身がない場合 中身を処理
+						th:unless="条件"でfalseとなった場合、このタグおよび内部にあるタグを表示する。-->
+		<p th:text="${quizForm.question}">クイズ内容</p>
+		<form th:action="@{/quiz/check}" th:object="${quizForm}" method="POST">		<!-- th:object…これにより、オブジェクト内の変数の参照の仕方がquizForm.idではなく、*{id}のような記述方法が可能になる
+										 th:object="${quizForm}"でquizFormを指定することで自動でquizFormに値を入れ送ってくれる-->
+			<input type="hidden" th:field="*{id}">		<!-- input type="hidden"…隠匿フィールド,  -->
+												<!-- th:objectで指定したオブジェクト内の変数を表示するためにth:field="*{変数名}"と記述
+													 また、th:field="*{変数名}"の中に記述した変数名がinputのid属性とname属性になる-->
+			<button name="answer" value="true">〇</button>
+			<button name="answer" value="false">×</button>
+		</form>
+	</th:block>
 </body>
 </html>
